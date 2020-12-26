@@ -14,8 +14,8 @@ public:
     Rectangle() {}
     Rectangle(std::pair<T,T> center, T length, T width): Center(center), Length(length), Width(width) {}
     // Print rectangle’s parameters
-    void Print(std::ostream &out) {
-        out << *this;
+    void Print() override {
+        std::cout << *this;
     }
     // Write the rectangle in file
     void Write(FILE *file) {
@@ -32,7 +32,7 @@ public:
         out << "{(" << rectangle.Center.first + rectangle.Length / 2.0 << ", " << rectangle.Center.second + rectangle.Width / 2.0 <<"), ";
         out << "(" << rectangle.Center.first - rectangle.Length / 2.0 << ", " << rectangle.Center.second + rectangle.Width / 2.0 <<"), ";
         out << "(" << rectangle.Center.first - rectangle.Length / 2.0 << ", " << rectangle.Center.second - rectangle.Width / 2.0 <<"), ";
-        out << "(" << rectangle.Center.first + rectangle.Length / 2.0 << ", " << rectangle.Center.second - rectangle.Width / 2.0 <<")}";
+        out << "(" << rectangle.Center.first + rectangle.Length / 2.0 << ", " << rectangle.Center.second - rectangle.Width / 2.0 <<")}\n";
         return out;
     }
 }; 

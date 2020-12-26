@@ -6,13 +6,13 @@
 template <class T>
 class PublishSubscribe {
 private:
-    std::mutex QueueOfMessages;
-    std::queue<T> QueueMutex;
+    std::queue<T> QueueOfMessages;
+    std::mutex QueueMutex;
 public:
     explicit PublishSubscribe() noexcept: QueueOfMessages(), QueueMutex() {}
     bool Empty() {
         QueueMutex.lock();
-        bool result = QueueOfMessages.front();
+        bool result = QueueOfMessages.empty();
         QueueMutex.unlock();
         return result;
     }
@@ -24,7 +24,7 @@ public:
         return top_element;
     }
 
-    void Push(cosnt T &message) {
+    void Push(const T &message) {
         QueueMutex.lock();
         QueueOfMessages.push(message);
         QueueMutex.unlock();
@@ -35,6 +35,5 @@ public:
         QueueOfMessages.pop();
         QueueMutex.unlock();
     }
-    
     ~PublishSubscribe() {}
 };

@@ -18,8 +18,8 @@ public:
     Rhombus(): Center(), Side(), Angle(90) {}
     Rhombus(std::pair<T,T> center, T side, float angle): Center(center), Side(side), Angle(angle) {}
 
-    void Print(std::ostream &out) override {
-        out << *this;
+    void Print() override {
+        std::cout << *this;
     }
 
     void Write(FILE *file) override {
@@ -51,7 +51,7 @@ public:
                 radius_y *= -1;
             }
         }
-        out << "}";
+        out << "}\n";
         return out;
     }
 };
