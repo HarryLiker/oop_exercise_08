@@ -6,8 +6,8 @@
 template <class T>
 class PublishSubscribe {
 private:
-    std::queue<T> QueueOfMessages;
-    std::mutex QueueMutex;
+    std::queue<T> QueueOfMessages; // Queue of elements to print in console and file
+    std::mutex QueueMutex; // For lock and unlock the queue
 public:
     explicit PublishSubscribe() noexcept: QueueOfMessages(), QueueMutex() {}
     bool Empty() {
