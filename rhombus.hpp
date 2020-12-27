@@ -22,12 +22,8 @@ public:
         std::cout << *this;
     }
 
-    void Write(FILE *file) override {
-        fwrite(&RHOMBUS_ID_TYPE, sizeof(unsigned int), 1, file);
-        fwrite(&Center.first, sizeof(T), 1, file);
-        fwrite(&Center.second, sizeof(T), 1, file);
-        fwrite(&Side, sizeof(T), 1, file);
-        fwrite(&Angle, sizeof(float), 1, file);
+    void Write(std::ofstream &file) override {
+        file << *this;
     }
 
     template <class U>

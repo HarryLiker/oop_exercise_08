@@ -20,13 +20,8 @@ public:
         std::cout << *this;
     }
     // Write trapeze in file
-    void Write(FILE *out) override {
-        fwrite(&TRAPEZE_ID_TYPE, sizeof(unsigned int), 1, out);
-        fwrite(&Center.first, sizeof(T), 1, out);
-        fwrite(&Center.second, sizeof(T), 1, out);
-        fwrite(&DownSide, sizeof(T), 1, out);
-        fwrite(&UpperSide, sizeof(T), 1, out);
-        fwrite(&Height, sizeof(T), 1, out);
+    void Write(std::ofstream &file) override {
+        file << *this;
     }
 
     template <class U>

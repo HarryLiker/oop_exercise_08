@@ -8,8 +8,9 @@
 #include "publish-subscribe.hpp"
 
 PublishSubscribe<std::vector<std::shared_ptr<Figure>>> message_queue;
-const std::string FILE_NAME = "file_test";
-FILE *file = NULL;
+const std::string FILE_NAME = "result_file";
+int number_file = 1;
+std::ofstream file;
 
 void ThreadFunction() {
     using function = std::function<void(std::shared_ptr<Figure> figure)>;
@@ -31,7 +32,7 @@ void ThreadFunction() {
                 awake = false;
                 break;
             }
-            file = fopen(FILE_NAME.c_str(), "wb");
+            file.open(FILE_NAME + std::to_string(number_file));
             while (!message.empty()) {
                 std::shared_ptr<Figure> figure_pointer = message.back();
                 message.pop_back();
@@ -39,7 +40,8 @@ void ThreadFunction() {
                     function(figure_pointer);
                 }
             }
-            fclose(file);
+            file.close();
+            number_file++;
             message_queue.Pop();
         }
     }
@@ -66,10 +68,13 @@ int main(int argc, char** argv) {
     while (std::cin >> figure_type) {
         if (figure_type == RECTANGLE_ID_TYPE) {
             figures.push_back(Factory<int, Rectangle<int>>::CreateFigure());
+            std::cout << "Figure rectangle has been added\n";
         } else if (figure_type == TRAPEZE_ID_TYPE) {
             figures.push_back(Factory<int, Trapeze<int>>::CreateFigure());
+            std::cout << "Figure trapeze has been added\n";
         } else if (figure_type == RHOMBUS_ID_TYPE) {
             figures.push_back(Factory<int, Rhombus<int>>::CreateFigure());
+            std::cout << "Figure rhombus has been added\n";
         }
         if (figures.size() == buffer_size) {
             message_queue.Push(figures);

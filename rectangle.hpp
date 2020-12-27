@@ -18,12 +18,8 @@ public:
         std::cout << *this;
     }
     // Write the rectangle in file
-    void Write(FILE *file) {
-        fwrite(&RECTANGLE_ID_TYPE, sizeof(unsigned int), 1, file);
-        fwrite(&Center.first, sizeof(T), 1, file);
-        fwrite(&Center.second, sizeof(T), 1, file);
-        fwrite(&Length, sizeof(T), 1, file);
-        fwrite(&Width, sizeof(T), 1, file);
+    void Write(std::ofstream &file) {
+        file << *this;
     }
 
     template <class U>

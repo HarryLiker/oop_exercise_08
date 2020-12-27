@@ -23,18 +23,6 @@ public:
         Rectangle<T> *rectangle = new Rectangle<T>(center, length, width);
         return std::shared_ptr<Figure>(rectangle);
     }
-
-    static std::shared_ptr<Figure> Read(FILE *file) {
-        std::pair<T,T> center;
-        T length;
-        T width;
-        fread(&center.first, sizeof(T), 1, file);
-        fread(&center.second, sizeof(T), 1, file);
-        fread(&length, sizeof(T), 1, file);
-        fread(&width, sizeof(T), 1, file);
-        Rectangle<T> *rectangle = new Rectangle<T>(center, length, width);
-        return std::shared_ptr<Figure>(rectangle);
-    }
 };
 
 template <class T>
@@ -53,18 +41,6 @@ public:
         Rhombus<T> *rhombus = new Rhombus<T>(center, side, angle);
         return std::shared_ptr<Figure>(rhombus);
     }
-
-    static std::shared_ptr<Figure> Read(FILE *file) {
-        std::pair<T,T> center;
-        T side;
-        float angle;
-        fread(&center.first, sizeof(T), 1, file);
-        fread(&center.second, sizeof(T), 1, file);
-        fread(&side, sizeof(T), 1, file);
-        fread(&angle, sizeof(float), 1, file);
-        Rhombus<T> *rhombus = new Rhombus<T>(center, side, angle);
-        return std::shared_ptr<Figure>(rhombus);
-    }
 };
 
 template <class T>
@@ -80,20 +56,6 @@ public:
         std::cout << "Enter down side, upper side and height: ";
         std::cin >> down_side >> upper_side;
         std::cin >> height;
-        Trapeze<T> *trapeze = new Trapeze<T>(center, down_side, upper_side, height);
-        return std::shared_ptr<Figure>(trapeze);
-    }
-
-    static std::shared_ptr<Figure> Read(FILE *file) {
-        std::pair<T,T> center;
-        T down_side;
-        T upper_side;
-        T height;
-        fread(&center.first, sizeof(T), 1, file);
-        fread(&center.second, sizeof(T), 1, file);
-        fread(&down_side, sizeof(T), 1, file);
-        fread(&upper_side, sizeof(T), 1, file);
-        fread(&height, sizeof(T), 1, file);
         Trapeze<T> *trapeze = new Trapeze<T>(center, down_side, upper_side, height);
         return std::shared_ptr<Figure>(trapeze);
     }
